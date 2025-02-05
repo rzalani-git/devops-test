@@ -1,6 +1,10 @@
 FROM graphiteapp/graphite-statsd
 
 
+# Set default environment to DEV if not provided
+ARG ENV=DEV
+ENV NODE_ENV=${ENV}
+
 COPY package*.json ./
 RUN npm install
 
