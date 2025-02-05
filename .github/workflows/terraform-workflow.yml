@@ -70,3 +70,15 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
+
+  # Security Checks (IaC and Secrets Scanning)
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check for IaC misconfigurations with Checkov
+        run: |
+          pip install checkov
+          checkov -d . --skip-check CKV_AWS_17
